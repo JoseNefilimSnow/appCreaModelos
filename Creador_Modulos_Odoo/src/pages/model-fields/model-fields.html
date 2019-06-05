@@ -1,0 +1,48 @@
+<!--
+  Generated template for the ModelFieldsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>Campos del modelo</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label>Cabe destacar que al crear un modelo, se crean unas variables por defectos como name, id, created at y edited at, sabiendo esto, a continuacion puede añadir otros campos a el modelo crado anteriormente</ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-input type="text" placeholder="Nombre del campo" [(ngModel)]="nombre_campo"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-select [(ngModel)]="tipo_campo" (ionChange)="relacionRequerida()" placeholder="Tipo de campo" cancelText="cerrar" okText="Elegir">
+    <ion-option value="boolean">Booleano</ion-option>
+    <ion-option value="datetime">Fecha</ion-option>
+    <ion-option value="float">Decimales</ion-option>
+    <ion-option value="integer">Enteros</ion-option>
+    <ion-option value="one2many" disabled>Relación de uno a muchos</ion-option>
+    <ion-option value="many2one">Relación de muchos a uno</ion-option>
+    <ion-option value="text">Texto</ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-item [hidden]="relacionNoRequerida">
+    <ion-input type="text" placeholder="Modelo a relacionar" [(ngModel)]="modelo_relacionado"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>¿Es obligatorio?</ion-label>
+    <ion-checkbox [(ngModel)]="esObligatorio"></ion-checkbox>
+  </ion-item>
+  <div class="spacer" style="height: 10px;"></div>
+  <button ion-button block round (click)="concatenar_campos()" color="dark">
+    Añadir campo
+  </button>
+    <button ion-button block round (click)="crear_modulo()" color="secondary" right>
+      Finalizar
+    </button>
+    <button ion-button block round (click)="descartar()" color="danger" left>
+      Descartar
+    </button>
+</ion-content>

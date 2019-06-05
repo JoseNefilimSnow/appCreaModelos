@@ -1,0 +1,7 @@
+{
+  "appId": "oi.guri.cm",
+  "appName": "Aplicación de creación de Modelos",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www"
+}
