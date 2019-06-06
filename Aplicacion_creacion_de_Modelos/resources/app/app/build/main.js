@@ -59,7 +59,7 @@ var LoginPage = /** @class */ (function () {
     };
     LoginPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-login',template:/*ion-inline-start:"C:\Users\JoseDV\Desktop\appCreaModelos\Creador_Modulos_Odoo\src\pages\login\login.html"*/'<!--\n  Generated template for the LoginPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  <ion-navbar color="primary">\n    <ion-title>Inicio de Sesión</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <ion-card>\n    <form (ngSubmit)="login()" #registerForm="ngForm">\n      <div>\n        <div class="spacer" style="height: 10px;"></div>\n\n        <ion-item class="border-box">\n          <ion-input type="text" placeholder="Base de datos de Odoo" [(ngModel)]="db_odoo" name="db_odoo" required>\n          </ion-input>\n        </ion-item>\n        <div class="spacer" style="height: 10px;"></div>\n\n        <ion-item class="border-box">\n          <ion-input type="email" placeholder="Usuario(Email)" [(ngModel)]="email" name="email" required></ion-input>\n        </ion-item>\n        <div class="spacer" style="height: 10px;"></div>\n\n        <ion-item class="border-box">\n          <ion-input type="password" [(ngModel)]="password" name="pass" placeholder="Contraseña" required></ion-input>\n        </ion-item>\n        <div class="spacer" style="height: 10px;"></div>\n        <button ion-button block round type="submit" color="primary">\n          Iniciar Sesión\n        </button>\n      </div>\n    </form>\n  </ion-card>\n</ion-content>\n'/*ion-inline-end:"C:\Users\JoseDV\Desktop\appCreaModelos\Creador_Modulos_Odoo\src\pages\login\login.html"*/,
+            selector: 'page-login',template:/*ion-inline-start:"C:\Users\JoseDV\Desktop\Creador_Modulos_Odoo\src\pages\login\login.html"*/'<!--\n  Generated template for the LoginPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  <ion-navbar color="primary">\n    <ion-title>Inicio de Sesión</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <ion-card>\n    <form (ngSubmit)="login()" #registerForm="ngForm">\n      <div>\n        <div class="spacer" style="height: 10px;"></div>\n\n        <ion-item class="border-box">\n          <ion-input type="text" placeholder="Base de datos de Odoo" [(ngModel)]="db_odoo" name="db_odoo" required>\n          </ion-input>\n        </ion-item>\n        <div class="spacer" style="height: 10px;"></div>\n\n        <ion-item class="border-box">\n          <ion-input type="email" placeholder="Usuario(Email)" [(ngModel)]="email" name="email" required></ion-input>\n        </ion-item>\n        <div class="spacer" style="height: 10px;"></div>\n\n        <ion-item class="border-box">\n          <ion-input type="password" [(ngModel)]="password" name="pass" placeholder="Contraseña" required></ion-input>\n        </ion-item>\n        <div class="spacer" style="height: 10px;"></div>\n        <button ion-button block round type="submit" color="primary">\n          Iniciar Sesión\n        </button>\n      </div>\n    </form>\n  </ion-card>\n</ion-content>\n'/*ion-inline-end:"C:\Users\JoseDV\Desktop\Creador_Modulos_Odoo\src\pages\login\login.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_3__providers_odoojsonrpc__["a" /* odooJsonRpc */], __WEBPACK_IMPORTED_MODULE_2__providers_utils__["a" /* Utils */]])
     ], LoginPage);
@@ -122,24 +122,31 @@ var ModelFieldsPage = /** @class */ (function () {
         }
     };
     ModelFieldsPage.prototype.concatenar_campos = function () {
-        var campos = {
-            model_id: this.id_modelo,
-            name: 'x_' + this.nombre_campo.toLowerCase(),
-            field_description: this.nombre_campo,
-            ttype: this.tipo_campo,
-            state: 'manual',
-            relation: this.modelo_relacionado,
-            relation_field: this.campo_de_relacion,
-            required: this.esObligatorio
-        };
-        this.odooRpc.crear_campos_modulo_odoo(campos);
-        this.utils.presentToast('¡Campo añadido!', 2000, true, "top");
-        this.nombre_campo = "";
-        this.tipo_campo = "";
-        this.modelo_relacionado = false;
-        this.campo_de_relacion = false;
-        this.relacionNoRequerida = true;
-        this.esObligatorio = false;
+        if (this.nombre_campo === null || this.nombre_campo === '') {
+            this.utils.presentAlert('Campo introducido vacio', 'No puedes crear un campo vacio', [{
+                    text: "Entendido"
+                }]);
+        }
+        else {
+            var campos = {
+                model_id: this.id_modelo,
+                name: 'x_' + this.nombre_campo.toLowerCase(),
+                field_description: this.nombre_campo,
+                ttype: this.tipo_campo,
+                state: 'manual',
+                relation: this.modelo_relacionado,
+                relation_field: this.campo_de_relacion,
+                required: this.esObligatorio
+            };
+            this.odooRpc.crear_campos_modulo_odoo(campos);
+            this.utils.presentToast('¡Campo añadido!', 2000, true, "top");
+            this.nombre_campo = "";
+            this.tipo_campo = "";
+            this.modelo_relacionado = false;
+            this.campo_de_relacion = false;
+            this.relacionNoRequerida = true;
+            this.esObligatorio = false;
+        }
     };
     ModelFieldsPage.prototype.crear_modulo = function () {
         this.utils.presentToast('¡Modulo Finalizado!', 2500, true, "top");
@@ -152,7 +159,7 @@ var ModelFieldsPage = /** @class */ (function () {
     };
     ModelFieldsPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-model-fields',template:/*ion-inline-start:"C:\Users\JoseDV\Desktop\appCreaModelos\Creador_Modulos_Odoo\src\pages\model-fields\model-fields.html"*/'<!--\n  Generated template for the ModelFieldsPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  <ion-navbar>\n    <ion-title>Campos del modelo</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <ion-item>\n    <ion-label>Cabe destacar que al crear un modelo, se crean unas variables por defectos como name, id, created at y edited at, sabiendo esto, a continuacion puede añadir otros campos a el modelo crado anteriormente</ion-label>\n  </ion-item>\n  <ion-item>\n    <ion-input type="text" placeholder="Nombre del campo" [(ngModel)]="nombre_campo"></ion-input>\n  </ion-item>\n  <ion-item>\n    <ion-select [(ngModel)]="tipo_campo" (ionChange)="relacionRequerida()" placeholder="Tipo de campo" cancelText="cerrar" okText="Elegir">\n    <ion-option value="boolean">Booleano</ion-option>\n    <ion-option value="datetime">Fecha</ion-option>\n    <ion-option value="float">Decimales</ion-option>\n    <ion-option value="integer">Enteros</ion-option>\n    <ion-option value="one2many" disabled>Relación de uno a muchos</ion-option>\n    <ion-option value="many2one">Relación de muchos a uno</ion-option>\n    <ion-option value="text">Texto</ion-option>\n    </ion-select>\n  </ion-item>\n  <ion-item [hidden]="relacionNoRequerida">\n    <ion-input type="text" placeholder="Modelo a relacionar" [(ngModel)]="modelo_relacionado"></ion-input>\n  </ion-item>\n  <ion-item>\n    <ion-label>¿Es obligatorio?</ion-label>\n    <ion-checkbox [(ngModel)]="esObligatorio"></ion-checkbox>\n  </ion-item>\n  <div class="spacer" style="height: 10px;"></div>\n  <button ion-button block round (click)="concatenar_campos()" color="dark">\n    Añadir campo\n  </button>\n    <button ion-button block round (click)="crear_modulo()" color="secondary" right>\n      Finalizar\n    </button>\n    <button ion-button block round (click)="descartar()" color="danger" left>\n      Descartar\n    </button>\n</ion-content>\n'/*ion-inline-end:"C:\Users\JoseDV\Desktop\appCreaModelos\Creador_Modulos_Odoo\src\pages\model-fields\model-fields.html"*/,
+            selector: 'page-model-fields',template:/*ion-inline-start:"C:\Users\JoseDV\Desktop\Creador_Modulos_Odoo\src\pages\model-fields\model-fields.html"*/'<!--\n  Generated template for the ModelFieldsPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  <ion-navbar>\n    <ion-title>Campos del modelo</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <ion-item>\n    <ion-label>Cabe destacar que al crear un modelo, se crean unas variables por defectos como name, id, created at y edited at, sabiendo esto, a continuacion puede añadir otros campos a el modelo crado anteriormente</ion-label>\n  </ion-item>\n  <ion-item>\n    <ion-input type="text" placeholder="Nombre del campo" [(ngModel)]="nombre_campo"></ion-input>\n  </ion-item>\n  <ion-item>\n    <ion-select [(ngModel)]="tipo_campo" (ionChange)="relacionRequerida()" placeholder="Tipo de campo" cancelText="cerrar" okText="Elegir">\n    <ion-option value="boolean">Booleano</ion-option>\n    <ion-option value="datetime">Fecha</ion-option>\n    <ion-option value="float">Decimales</ion-option>\n    <ion-option value="integer">Enteros</ion-option>\n    <ion-option value="one2many" disabled>Relación de uno a muchos</ion-option>\n    <ion-option value="many2one">Relación de muchos a uno</ion-option>\n    <ion-option value="text">Texto</ion-option>\n    </ion-select>\n  </ion-item>\n  <ion-item [hidden]="relacionNoRequerida">\n    <ion-input type="text" placeholder="Modelo a relacionar" [(ngModel)]="modelo_relacionado"></ion-input>\n  </ion-item>\n  <ion-item>\n    <ion-label>¿Es obligatorio?</ion-label>\n    <ion-checkbox [(ngModel)]="esObligatorio"></ion-checkbox>\n  </ion-item>\n  <div class="spacer" style="height: 10px;"></div>\n  <button ion-button block round (click)="concatenar_campos()" color="dark">\n    Añadir campo\n  </button>\n    <button ion-button block round (click)="crear_modulo()" color="secondary" right>\n      Finalizar\n    </button>\n    <button ion-button block round (click)="descartar()" color="danger" left>\n      Descartar\n    </button>\n</ion-content>\n'/*ion-inline-end:"C:\Users\JoseDV\Desktop\Creador_Modulos_Odoo\src\pages\model-fields\model-fields.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_odoojsonrpc__["a" /* odooJsonRpc */], __WEBPACK_IMPORTED_MODULE_3__providers_utils__["a" /* Utils */]])
     ], ModelFieldsPage);
@@ -189,11 +196,11 @@ var map = {
 		2
 	],
 	"../pages/model-creation/model-creation.module": [
-		678,
+		677,
 		1
 	],
 	"../pages/model-fields/model-fields.module": [
-		677,
+		678,
 		0
 	]
 };
@@ -278,8 +285,8 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* MyApp */], {}, {
                     links: [
                         { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/model-fields/model-fields.module#ModelFieldsPageModule', name: 'ModelFieldsPage', segment: 'model-fields', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/model-creation/model-creation.module#ModelCreationPageModule', name: 'ModelCreationPage', segment: 'model-creation', priority: 'low', defaultHistory: [] }
+                        { loadChildren: '../pages/model-creation/model-creation.module#ModelCreationPageModule', name: 'ModelCreationPage', segment: 'model-creation', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/model-fields/model-fields.module#ModelFieldsPageModule', name: 'ModelFieldsPage', segment: 'model-fields', priority: 'low', defaultHistory: [] }
                     ]
                 }),
                 __WEBPACK_IMPORTED_MODULE_9__angular_http__["c" /* HttpModule */]
@@ -342,7 +349,7 @@ var MyApp = /** @class */ (function () {
         });
     }
     MyApp = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"C:\Users\JoseDV\Desktop\appCreaModelos\Creador_Modulos_Odoo\src\app\app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n'/*ion-inline-end:"C:\Users\JoseDV\Desktop\appCreaModelos\Creador_Modulos_Odoo\src\app\app.html"*/
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"C:\Users\JoseDV\Desktop\Creador_Modulos_Odoo\src\app\app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n'/*ion-inline-end:"C:\Users\JoseDV\Desktop\Creador_Modulos_Odoo\src\app\app.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
     ], MyApp);
@@ -666,6 +673,13 @@ var ModelCreationPage = /** @class */ (function () {
         this.odooRpc = odooRpc;
         this.utils = utils;
     }
+    ModelCreationPage.prototype.boton_inutil = function () {
+        this.odooRpc.obtener_estructura().then(function (res) {
+            console.log(JSON.parse(res._body));
+        }).catch(function (err) {
+            alert(err);
+        });
+    };
     ModelCreationPage.prototype.crear_modelo = function () {
         var _this = this;
         this.odooRpc.crear_modulo_odoo(this.nombre_modelo).then(function (res) {
@@ -676,7 +690,7 @@ var ModelCreationPage = /** @class */ (function () {
     };
     ModelCreationPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-model-creation',template:/*ion-inline-start:"C:\Users\JoseDV\Desktop\appCreaModelos\Creador_Modulos_Odoo\src\pages\model-creation\model-creation.html"*/'<ion-header>\n  <ion-navbar color=\'primary\'>\n    <ion-title>Crear Modelo:</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <form (ngSubmit)="crear_modelo()" #registerForm="ngForm">\n    <ion-item>\n      <ion-input type="text" [(ngModel)]="nombre_modelo" name="name" placeholder="Nombre del Modelo">\n      </ion-input>\n    </ion-item>\n    <div class="spacer" style="height: 10px;"></div>\n    <button ion-button block round type="submit" color="primary">\n      Crear Modelo\n    </button>\n  </form>\n</ion-content>\n'/*ion-inline-end:"C:\Users\JoseDV\Desktop\appCreaModelos\Creador_Modulos_Odoo\src\pages\model-creation\model-creation.html"*/,
+            selector: 'page-model-creation',template:/*ion-inline-start:"C:\Users\JoseDV\Desktop\Creador_Modulos_Odoo\src\pages\model-creation\model-creation.html"*/'<ion-header>\n  <ion-navbar color=\'primary\'>\n    <ion-title>Crear Modelo:</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <form (ngSubmit)="crear_modelo()" #registerForm="ngForm">\n    <ion-item>\n      <ion-input type="text" [(ngModel)]="nombre_modelo" name="name" placeholder="Nombre del Modelo">\n      </ion-input>\n    </ion-item>\n    <div class="spacer" style="height: 10px;"></div>\n    <button ion-button block round type="submit" color="primary">\n      Crear Modelo\n    </button>\n  </form>\n  <button ion-button block round (click)="boton_inutil()" color="secondary">\n    Derp\n  </button>\n</ion-content>\n'/*ion-inline-end:"C:\Users\JoseDV\Desktop\Creador_Modulos_Odoo\src\pages\model-creation\model-creation.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_odoojsonrpc__["a" /* odooJsonRpc */], __WEBPACK_IMPORTED_MODULE_3__providers_utils__["a" /* Utils */]])
     ], ModelCreationPage);

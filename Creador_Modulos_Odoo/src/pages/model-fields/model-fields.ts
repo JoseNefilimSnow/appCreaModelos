@@ -50,31 +50,30 @@ export class ModelFieldsPage {
     } 
   }
   concatenar_campos() {
-    if(this.nombre_campo===null || this.nombre_campo===''){
-      this.utils.presentAlert('Campo introducido vacio','No puedes crear un campo vacio',[{
-        text:"Entendido"
-      }])
-    }else{
-      let campos = {
-        model_id: this.id_modelo,
-        name:'x_'+this.nombre_campo.toLowerCase(),
-        field_description:this.nombre_campo,
-        ttype: this.tipo_campo,
-        state: 'manual',
-        relation:this.modelo_relacionado,
-        relation_field:this.campo_de_relacion,
-        required: this.esObligatorio
+      if(this.nombre_campo===null || this.nombre_campo===''){
+        this.utils.presentAlert('Campo introducido vacio','No puedes crear un campo vacio',[{
+          text:"Entendido"
+        }])
+      }else{
+        let campos = {
+          model_id: this.id_modelo,
+          name:'x_'+this.nombre_campo.toLowerCase(),
+          field_description:this.nombre_campo,
+          ttype: this.tipo_campo,
+          state: 'manual',
+          relation:this.modelo_relacionado,
+          relation_field:this.campo_de_relacion,
+          required: this.esObligatorio
+        }
+        this.odooRpc.crear_campos_modulo_odoo(campos);
+        this.utils.presentToast('¡Campo añadido!', 2000, true,"top");
+        this.nombre_campo = "";
+        this.tipo_campo = "";
+        this.modelo_relacionado=false;
+        this.campo_de_relacion=false;
+        this.relacionNoRequerida=true;
+        this.esObligatorio = false;
       }
-      this.odooRpc.crear_campos_modulo_odoo(campos);
-      this.utils.presentToast('¡Campo añadido!', 2000, true,"top");
-      this.nombre_campo = "";
-      this.tipo_campo = "";
-      this.modelo_relacionado=false;
-      this.campo_de_relacion=false;
-      this.relacionNoRequerida=true;
-      this.esObligatorio = false;
-    }
-    
   }
   crear_modulo() {
     this.utils.presentToast('¡Modulo Finalizado!', 2500, true,"top");

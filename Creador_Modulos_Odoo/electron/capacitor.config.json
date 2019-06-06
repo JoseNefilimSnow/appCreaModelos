@@ -1,6 +1,6 @@
 {
   "appId": "oi.guri.cm",
-  "appName": "Aplicación de creación de Modelos",
+  "appName": "Creador De Modulos Odoo",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www"

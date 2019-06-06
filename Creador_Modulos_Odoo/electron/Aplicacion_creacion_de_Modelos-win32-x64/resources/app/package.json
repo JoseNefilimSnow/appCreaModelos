@@ -1,0 +1,23 @@
+{
+  "name": "Aplicacion_creacion_de_Modelos",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "electron:start": "electron ./"
+  },
+  "dependencies": {
+    "@capacitor/electron": "^1.0.0-alpha.28",
+    "electron-is-dev": "^0.3.0",
+    "electron-packager": "^13.1.1"
+  },
+  "devDependencies": {
+    "electron": "^4.0.0"
+  },
+  "keywords": [
+    "capacitor",
+    "electron"
+  ],
+  "author": "",
+  "license": "ISC"
+}
